@@ -11,7 +11,7 @@ const checkConnections = async () => {
     const dbName = dbInfo?.db_name ?? 'default';
     console.log(`✅ Connected to Neon PostgreSQL pg (Database: "${dbName}")`);
   } catch (dbErr) {
-    console.error(`❌ Neon PostgreSQL Connection Failed miserably: ${dbErr?.message ?? dbErr}`);
+    console.error(`❌ Neon PostgreSQL Connection Failed Loser: ${dbErr?.message ?? dbErr}`);
   }
 
   try {
