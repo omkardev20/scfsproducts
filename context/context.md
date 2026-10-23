@@ -111,6 +111,6 @@ scfproducts/
 
 ## 7. Current Progress Status
 
-- **Active Stage:** Stage 2 — Product CRUD & 3-Layer Architecture (In-Memory first)
-- **Completed:** Stage 1 — Fastify & HTTP Fundamentals (Server bootstrap, modular route plugins, environment variables, live Neon PostgreSQL and Redis connectivity verified).
-- **Current Step:** Design Product entity and implement the 3-Layer Architecture (`src/repositories/productRepository.js` -> `src/services/productService.js` -> `src/routes/productRoutes.js`).
+- **Active Stage:** Stage 10 — Frontend / API Consumer. The API the UI needs is written down in [`frontend-requirements.md`](frontend-requirements.md).
+- **Completed:** Stages 1–6 for the running API: Fastify bootstrap, auth (JWT + bcrypt), outlets, categories, products with Redis cache, orders with stock locking, and one JSON error shape.
+- **Still open:** Docker image for the API, AWS deploy, and the frontend itself. Follow `context/frontend-requirements.md` when building the UI. Do not invent fields. The server owns prices, tax (5%), and stock.
