@@ -16,8 +16,24 @@ const swaggerOptions = {
       },
     ],
     tags: [
-      { name: 'System', description: 'System health & operational endpoints' },
+      { name: 'System', description: 'Health check. No token required.' },
+      { name: 'Auth', description: 'Signup, login, and the current user.' },
+      { name: 'Outlets', description: 'Restaurant branches that place orders.' },
+      { name: 'Categories', description: 'Product groups.' },
+      { name: 'Products', description: 'Catalog items and stock levels.' },
+      { name: 'Orders', description: 'Supply orders and their status.' },
+      { name: 'Inventory', description: 'Stock adjustments and the audit log.' },
     ],
+    components: {
+      securitySchemes: {
+        // Protected routes expect header: Authorization: Bearer <token>
+        bearerAuth: {
+          type: 'http',
+          scheme: 'bearer',
+          bearerFormat: 'JWT',
+        },
+      },
+    },
   },
 };
 

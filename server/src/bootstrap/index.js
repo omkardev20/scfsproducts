@@ -3,6 +3,7 @@ const { createApp } = require('./app');
 const { checkConnections } = require('./connections');
 const { registerSwagger } = require('./swagger');
 const { registerErrors } = require('./errors');
+const { registerAuth } = require('./auth');
 const { registerRoutes } = require('./routes');
 const { listen } = require('./listen');
 
@@ -22,6 +23,8 @@ const start = async () => {
     const app = createApp();
     await registerSwagger(app);
     await registerErrors(app);
+    // Auth decorates authenticate/requireRole. Routes that use them must come after this.
+    await registerAuth(app);
     await registerRoutes(app);
     await listen(app);
   } catch (error) {
