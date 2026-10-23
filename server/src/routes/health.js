@@ -1,48 +1,53 @@
 // src/routes/health.js
+// Public probe. No login token. It really asks PostgreSQL and Redis,
+// so a broken connection shows up as 503 instead of a fake "healthy".
+
+const { pool } = require('../config/db');
+const { redisClient } = require('../config/redis');
 
 /**
- * Health check route plugin
  * @param {import('fastify').FastifyInstance} fastify
- * @param {Object} options
  */
-async function healthRoutes(fastify, options) {
+async function healthRoutes(fastify) {
   fastify.get(
     '/health',
     {
       schema: {
-        description: 'Check operational status of the server and connected services (PostgreSQL & Redis)',
+        description: 'Check PostgreSQL and Redis. No login token is required.',
         tags: ['System'],
         summary: 'Service health check',
-        response: {
-          200: {
-            description: 'Successful health status response',
-            type: 'object',
-            properties: {
-              status: { type: 'string', example: 'healthy' },
-              message: { type: 'string', example: 'SupplyHub API is running' },
-              services: {
-                type: 'object',
-                properties: {
-                  neon_postgres: { type: 'string', example: 'connected' },
-                  redis: { type: 'string', example: 'connected' },
-                },
-              },
-              timestamp: { type: 'string', example: '2026-10-19T14:00:00.000Z' },
-            },
-          },
-        },
       },
     },
     async (request, reply) => {
-      return {
-        status: 'healthy',
-        message: 'SupplyHub API is running',
+      let postgres = 'disconnected';
+      let redis = 'disconnected';
+
+      try {
+        // SELECT 1 only proves the pool can run a query. It does not read business tables.
+        await pool?.query?.('SELECT 1');
+        postgres = 'connected';
+      } catch (error) {
+        console.error('❌ Health check postgres failed:', error?.message ?? error);
+      }
+
+      try {
+        const ping = await redisClient?.ping?.();
+        redis = ping ? 'connected' : 'disconnected';
+      } catch (error) {
+        console.error('❌ Health check redis failed:', error?.message ?? error);
+      }
+
+      const healthy = postgres === 'connected' && redis === 'connected';
+
+      return reply?.code?.(healthy ? 200 : 503)?.send?.({
+        status: healthy ? 'healthy' : 'degraded',
+        message: healthy ? 'SupplyHub API is running' : 'One or more services are unreachable',
         services: {
-          neon_postgres: 'connected',
-          redis: 'connected',
+          postgres,
+          redis,
         },
-        timestamp: new Date()?.toISOString?.() ?? new Date().toString(),
-      };
+        timestamp: new Date()?.toISOString?.() ?? null,
+      });
     }
   );
 }

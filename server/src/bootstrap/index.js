@@ -2,11 +2,14 @@
 const { createApp } = require('./app');
 const { checkConnections } = require('./connections');
 const { registerSwagger } = require('./swagger');
+const { registerErrors } = require('./errors');
 const { registerRoutes } = require('./routes');
 const { listen } = require('./listen');
 
 /**
  * Boots connections, plugins, routes, and the HTTP listener.
+ * Order matters: Swagger must see the routes, and the error handler must
+ * be registered before those routes throw.
  */
 const start = async () => {
   try {
@@ -18,6 +21,7 @@ const start = async () => {
 
     const app = createApp();
     await registerSwagger(app);
+    await registerErrors(app);
     await registerRoutes(app);
     await listen(app);
   } catch (error) {
