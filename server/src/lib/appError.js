@@ -1,12 +1,12 @@
 // src/lib/appError.js
 // A known request failure: bad input, missing login, or a forbidden action.
-// Services throw this. The error handler turns it into JSON for the frontend.
+// Services throw this. The error handler turns it into JSON for the API client.
 // Unexpected bugs stay normal Errors and become a generic 500.
 
 class AppError extends Error {
   /**
    * @param {number} statusCode HTTP status the client should receive
-   * @param {string} message Safe sentence the frontend can show
+   * @param {string} message Safe sentence the API client can show
    * @param {unknown} [details] Field errors, or null when there are none
    */
   constructor(statusCode, message, details) {

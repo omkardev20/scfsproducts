@@ -30,7 +30,7 @@ Any AI agent interacting with this project MUST adhere strictly to the following
    - Specify the working directory and terminal.
    - Provide the **testing command** (e.g., `curl`) and **expected output**.
    - Wait for the user's confirmation / terminal output before proceeding.
-5. **Backend First, Frontend Last:** No UI or frontend work until the backend API, database, cache, and tests are solidly working.
+5. **Backend Only:** This project has no frontend. The API is used and documented through Swagger UI at `/docs`.
 6. **No Premature Complexity:** Strict adherence to stack boundaries. No TypeScript, no ORMs (Prisma/TypeORM/Drizzle), no microservices, and no Kubernetes at this stage.
 7. **Defensive Coding & Null Safety:** Mandatory use of optional chaining (`?.`), nullish coalescing (`??`), and explicit null/undefined checks across every layer of code (config, routes, services, repositories, error handlers). Never perform unchecked property accesses or function invocations on objects that could be null or undefined.
 
@@ -91,7 +91,6 @@ scfproducts/
 │   ├── compose.yaml          # Multi-container orchestration (API, Postgres, Redis)
 │   ├── package.json
 │   └── package-lock.json
-└── [future] client/          # Frontend client application (Stage 10)
 ```
 
 ---
@@ -107,10 +106,10 @@ scfproducts/
 - **Stage 7 — Docker & Docker Compose:** Building optimized Docker images, Docker networking, persistent named volumes for Postgres/Redis, environment injection, compose health checks.
 - **Stage 8 — Cloud Deployment (AWS Linux VM):** EC2 instance setup, security groups/firewall, SSH keys, non-root user setup, Nginx reverse proxy, SSL/TLS with Let's Encrypt, cost monitoring & resource teardown.
 - **Stage 9 — Git, GitHub & CI/CD:** Meaningful commit history, branch strategies, GitHub Actions CI workflow (linting, automated test runs on push/PR).
-- **Stage 10 — Frontend / API Consumer:** Lightweight frontend or client dashboard to demonstrate real-world consumption of the SupplyHub API.
+- **Stage 10 — API Documentation:** OpenAPI spec and Swagger UI at `/docs` as the way to explore and test every route.
 
 ## 7. Current Progress Status
 
-- **Active Stage:** Stage 10 — Frontend / API Consumer. The API the UI needs is written down in [`frontend-requirements.md`](frontend-requirements.md).
-- **Completed:** Stages 1–6 for the running API: Fastify bootstrap, auth (JWT + bcrypt), outlets, categories, products with Redis cache, orders with stock locking, and one JSON error shape.
-- **Still open:** Docker image for the API, AWS deploy, and the frontend itself. Follow `context/frontend-requirements.md` when building the UI. Do not invent fields. The server owns prices, tax (5%), and stock.
+- **Direction:** Backend only. There is no frontend. Swagger UI at `/docs` is how the API is explored and tested.
+- **Completed:** Stages 1–6 and 10 for the running API: Fastify bootstrap, auth (JWT + bcrypt), outlets, categories, products with Redis cache, orders with stock locking, inventory audit log, one JSON error shape, and Swagger docs.
+- **Still open:** Docker image for the API, AWS deploy, and CI. The server owns prices, tax (5%), and stock.

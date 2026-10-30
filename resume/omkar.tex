@@ -1,0 +1,145 @@
+%-------------------------------------------------------------------------------
+% Omkar Swami - Resume (FULL STACK) - ATS-friendly, single column, 1 page
+% Compile on Overleaf with pdfLaTeX.
+%-------------------------------------------------------------------------------
+\documentclass[a4paper,11pt]{article}
+
+%---------- SPACING KNOBS (tune these to fill exactly 1 page) ----------
+% Too much empty space at the bottom -> increase. Spills to page 2 -> decrease.
+\newcommand{\myLineSpacing}{1.04}  % line spacing inside text      (1.00 - 1.15)
+\newcommand{\bulletgap}{1.5pt}     % gap between bullet points     (0pt - 4pt)
+\newcommand{\sectiongap}{6pt}      % gap above each section title  (2pt - 10pt)
+\newcommand{\entrygap}{4pt}        % gap between job/project items (0pt - 6pt)
+
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{tabularx}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\input{glyphtounicode}
+\pdfgentounicode=1   % makes the PDF text machine-readable for ATS parsers
+
+\pagestyle{empty}
+\raggedright
+\raggedbottom
+\setlength{\tabcolsep}{0in}
+\addtolength{\oddsidemargin}{-0.5in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1.0in}
+\addtolength{\topmargin}{-0.45in}
+\addtolength{\textheight}{1.0in}
+\urlstyle{same}
+\linespread{\myLineSpacing}
+
+\titleformat{\section}{\vspace{\sectiongap}\scshape\large\bfseries}{}{0em}{}[\color{black}\titlerule\vspace{-3pt}]
+\titlespacing*{\section}{0pt}{0pt}{4pt}
+
+% ---------- helpers ----------
+\newcommand{\resumeItem}[1]{\item\small{#1}}
+\newcommand{\resumeSubheading}[4]{
+  \vspace{\entrygap}\item
+  \begin{tabular*}{\textwidth}[t]{l@{\extracolsep{\fill}}r}
+    \textbf{#1} & \small #2 \\
+    \textit{\small #3} & \textit{\small #4} \\
+  \end{tabular*}\vspace{-3pt}}
+\newcommand{\resumeProjectHeading}[2]{
+  \vspace{\entrygap}\item
+  \begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}r}
+    \small #1 & \small #2 \\
+  \end{tabular*}\vspace{-3pt}}
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0in, label={}, topsep=0pt]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}[leftmargin=0.15in, itemsep=\bulletgap, parsep=0pt, topsep=2pt]}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-4pt}}
+
+%-------------------------------------------------------------------------------
+\begin{document}
+
+%---------- HEADER ----------
+\begin{center}
+  {\Huge \scshape Omkar Swami} \\ \vspace{2pt}
+  \small Full Stack Developer \textbar{} Node.js \textbar{} React.js \textbar{} TypeScript \quad $|$ \quad Mumbai, India \\ \vspace{3pt}
+  \small +91 9167955436 $|$
+  \href{mailto:omkarswami0420@gmail.com}{omkarswami0420@gmail.com} $|$
+  \href{https://linkedin.com/in/omkarswami20}{linkedin.com/in/omkarswami20} $|$
+  \href{https://github.com/omkarswami20}{github.com/omkarswami20}
+\end{center}
+\vspace{-8pt}
+
+%---------- SUMMARY ----------
+\section{Summary}
+\small{Full Stack Developer with 1+ year of experience shipping customer-facing features to production and building backend services in Node.js. Able to own a feature end to end, from API and database design to a typed, responsive frontend, with a focus on secure authentication, clean layered architecture and reusable code. Looking to grow as a Full Stack Developer on a product team.}
+
+%---------- SKILLS ----------
+\section{Technical Skills}
+\begin{itemize}[leftmargin=0in, label={}]
+\small{\item{
+  \textbf{Languages}{: JavaScript (ES6+), TypeScript} \\
+  \textbf{Backend}{: Node.js, Express.js, Fastify, REST APIs, Zod, WebSocket, Socket.IO} \\
+  \textbf{Frontend}{: React.js, Redux Toolkit, RTK Query, Material UI,React-Native} \\
+  \textbf{Databases}{: PostgreSQL, MySQL, MongoDB, Redis} \\
+  \textbf{Auth \& Security}{: JWT (access/refresh), RBAC, OTP, MPIN, bcrypt} \\
+  \textbf{Integrations \& Tools}{: Razorpay, Git, GitHub, Postman, Swagger, Vercel, Render}
+  % Uncomment ONLY after you have actually used these in a project:
+  % \\ \textbf{DevOps \& Testing}{: Docker, GitHub Actions (CI/CD), Jest, Supertest}
+}}
+\end{itemize}
+\vspace{-6pt}
+
+%---------- EXPERIENCE ----------
+\section{Experience}
+\resumeSubHeadingListStart
+  \resumeSubheading
+    {Associate Software Engineer}{Jun 2025 -- Present}
+    {TechStalwarts -- inXits (Wealth Management \& Investment Platform)}{Mumbai, India}
+    \resumeItemListStart
+      \resumeItem{Develop and maintain customer-facing web and mobile features for a live production platform using \textbf{React.js}, \textbf{Redux Toolkit}, \textbf{RTK Query} and \textbf{Capacitor}, integrating with backend \textbf{REST APIs}}
+      \resumeItem{Built mutual fund investment workflows including fund discovery, lump-sum and \textbf{SIP} investments, portfolio tracking, asset allocation and risk assessment}
+      \resumeItem{Implemented onboarding and \textbf{KYC/eKYC} flows with customer-type-based logic, bank linking, \textbf{Digio} e-Sign and \textbf{MF Central} consent integration}
+      \resumeItem{Integrated \textbf{Razorpay} payment workflows and QR-code generation/download, handling payment states across investment modules}
+      \resumeItem{Designed reusable components using container-presentational architecture, reducing  duplicated code by \textbf{about 40\%}}
+      \resumeItem{Debugged and resolved \textbf{production and UAT} issues across authentication, payments, investments and mobile modules}
+    \resumeItemListEnd
+\resumeSubHeadingListEnd
+\vspace{-6pt}
+
+%---------- PROJECTS ----------
+\section{Projects}
+\resumeSubHeadingListStart
+  \resumeProjectHeading
+    {\textbf{Vistora -- Property Rental Platform} $|$ \emph{Node.js, Express.js, PostgreSQL, Zod, JWT, TypeScript}}
+    {\href{https://github.com/omkarswami20/VistoraServer}{\underline{API}} \, \href{https://github.com/omkarswami20/vistora-web}{\underline{Web}}}
+    \resumeItemListStart
+      \resumeItem{Built a modular \textbf{REST API} with separate route, validation, controller, service and repository layers, \textbf{Zod} request validation and centralized error handling}
+      \resumeItem{Engineered passwordless \textbf{OTP + MPIN} login: OTP verification issues a 2-minute signed ticket, MPINs are hashed with \textbf{bcrypt}, and 15-min \textbf{JWT} access tokens pair with 7-day refresh tokens stored server-side for revocation and logout from all sessions}
+      \resumeItem{Implemented \textbf{RBAC} for Guest, Host and Admin roles, with admin accounts seeded only (no self-registration) and suspended accounts blocked on every request}
+      \resumeItem{Designed a normalized \textbf{PostgreSQL} schema (properties, images, amenities, availability) using raw parameterized SQL, indexes and \textbf{transactions} for atomic multi-table inserts; fetched nested data in one query with \textbf{JSON\_AGG}}
+      \resumeItem{Built the client in \textbf{Vue 3 + TypeScript} with Pinia and \textbf{TanStack Query}, including an Axios interceptor that silently refreshes expired tokens and queues concurrent requests during refresh, plus role-based dashboards and an MPIN screen lock}
+      % Uncomment ONLY once built and pushed to GitHub:
+      % \resumeItem{Built a concurrency-safe booking flow using \textbf{Redis} TTL locks and database transactions to prevent double bookings}
+      % \resumeItem{Integrated \textbf{Razorpay} test-mode payments with webhook signature verification and booking payment states}
+    \resumeItemListEnd
+
+  \resumeProjectHeading
+    {\textbf{SupplyHub -- B2B Food Supply Backend} $|$ \emph{Node.js, Fastify, PostgreSQL, Redis, JWT, Swagger}}
+    {\href{https://github.com/omkardev20/scfsproducts}{\underline{GitHub}}}
+    \resumeItemListStart
+      \resumeItem{Designed a layered \textbf{REST API} (routes, services, repositories) on raw parameterized SQL with JSON-schema request validation, a single error format and \textbf{OpenAPI/Swagger} docs for 15 endpoints}
+      \resumeItem{Built orders in one \textbf{PostgreSQL transaction} with \textbf{SELECT FOR UPDATE} locks in a fixed order to stop overselling and deadlocks, server-side pricing, restock on cancel and an inventory audit log}
+      \resumeItem{Implemented \textbf{JWT} auth with \textbf{bcrypt} and \textbf{RBAC} that scopes managers to their own outlet; added \textbf{Redis} cache-aside for the catalog with TTL, invalidation on writes and fallback to PostgreSQL}
+    \resumeItemListEnd
+\resumeSubHeadingListEnd
+\vspace{-6pt}
+
+%---------- EDUCATION ----------
+\section{Education}
+\resumeSubHeadingListStart
+  \resumeSubheading
+    {G.H. Raisoni College of Engineering and Management}{Pune, India}
+    {Bachelor of Technology in Computer Science and Engineering -- CGPA: 7.31}{2020 -- 2024}
+\resumeSubHeadingListEnd
+
+\end{document}

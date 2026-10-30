@@ -3,7 +3,7 @@
 
 /**
  * Converts a database timestamp into an ISO string.
- * Missing or invalid values become null so the frontend never sees "Invalid Date".
+ * Missing or invalid values become null so the API client never sees "Invalid Date".
  * @param {unknown} value
  * @returns {string | null}
  */

@@ -1,5 +1,5 @@
 // src/bootstrap/errors.js
-// Every failed request uses one JSON shape the frontend can rely on:
+// Every failed request uses one JSON shape API clients can rely on:
 // { error: { message, details } }
 
 const { AppError } = require('../lib/appError');

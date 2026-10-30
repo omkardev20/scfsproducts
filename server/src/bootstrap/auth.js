@@ -19,7 +19,7 @@ const registerAuth = async (app) => {
 
   await app?.register?.(jwt, {
     secret,
-    // Eight hours matches a working shift. The frontend must log in again after that.
+    // Eight hours matches a working shift. Clients must log in again after that.
     sign: { expiresIn: '8h' },
   });
 

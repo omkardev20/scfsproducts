@@ -1,7 +1,7 @@
 // src/services/orderRules.js
 // Pure order rules. No database. Tests cover this file on its own.
-// Tax is 5 percent of the subtotal. The frontend displays the numbers the
-// server returns and does not send its own prices.
+// Tax is 5 percent of the subtotal. Clients use the numbers the server
+// returns and cannot send their own prices.
 
 const { AppError } = require('../lib/appError');
 

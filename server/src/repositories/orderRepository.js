@@ -73,7 +73,7 @@ const findOrderById = async (id, client) => {
 };
 
 /**
- * List rows do not include line items. The frontend loads GET /api/orders/:id for those.
+ * List rows do not include line items. Clients load GET /api/orders/:id for those.
  * @param {{ limit: number, offset: number, outletId: string | null, status: string | null }} query
  */
 const listOrders = async ({ limit, offset, outletId, status }) => {
