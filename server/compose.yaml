@@ -1,16 +1,59 @@
+# docker compose up --build
+# starts three containers on one network:
+#   api      your Node server, built from the Dockerfile
+#   postgres the database
+#   redis    the cache
+#
+# Inside the api container, "localhost" is the api itself.
+# The database host is the service name "postgres". The cache host is "redis".
+
 services:
+  api:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      PORT: 3000
+      HOST: 0.0.0.0
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: scfproducts_db
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      JWT_SECRET: local-docker-secret
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
   postgres:
     image: postgres:16-alpine
-    container_name: scfproducts_postgres
-    restart: always
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: scfproducts_db
-    ports:
-      - "5432:5432"
+    # No host port. This laptop already has Postgres on 5432.
+    # The api container reaches this one at the hostname "postgres".
     volumes:
       - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d scfproducts_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  redis:
+    image: redis:7-alpine
+    # No host port. This laptop already has Redis on 6379.
+    # The api container reaches this one at the hostname "redis".
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
 
 volumes:
   pgdata:
